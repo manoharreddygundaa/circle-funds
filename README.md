@@ -256,19 +256,4 @@ npm run build
 
 ---
 
-## Interview Talking Points
 
-1. **Why MVC?** Separates concerns — models define data shape, controllers hold business logic, routes define HTTP interface. Easy to test each layer independently.
-
-2. **JWT vs Sessions?** JWT is stateless — no server-side session store needed. Scales horizontally. Tradeoff: can't revoke tokens before expiry (mitigated by short expiry + refresh tokens).
-
-3. **Why bcrypt cost factor 12?** Each +1 doubles compute time. Factor 12 ≈ 300ms on modern hardware — fast enough for UX, slow enough to make brute-force impractical.
-
-4. **Mongoose `select: false`?** Ensures password hash is never accidentally returned in any query. Must explicitly `.select('+password')` when needed (only in login).
-
-5. **useLoans hook pattern?** Extracts filter state + API calls into a reusable hook. Pages become thin — they just render what the hook provides. Easier to test and reuse.
-
----
-
-## License
-MIT
