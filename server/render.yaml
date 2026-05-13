@@ -12,10 +12,10 @@ services:
       - key: PORT
         value: 5000
       - key: MONGO_URI
-        sync: false        # Set in Render dashboard — never commit this
+        sync: false        # Set in Render dashboard
       - key: JWT_SECRET
-        sync: false        # Set in Render dashboard — never commit this
+        sync: false        # Set in Render dashboard
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: CLIENT_URL
-        sync: false        # Set to your Vercel domain
+        value: https://circle-funds-3.onrender.com  # Update with your frontend URL (no trailing slash)

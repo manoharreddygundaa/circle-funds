@@ -14,8 +14,24 @@ const app = express();
 
 // ── Security Middleware ──────────────────────────────
 app.use(helmet());
+
+// CORS with flexible origin matching (handles trailing slashes)
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    
+    const normalizeUrl = (url) => url.replace(/\/$/, ''); // Remove trailing slash
+    const normalizedOrigin = normalizeUrl(origin);
+    const normalizedClientUrl = normalizeUrl(clientUrl);
+    
+    if (normalizedOrigin === normalizedClientUrl) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
